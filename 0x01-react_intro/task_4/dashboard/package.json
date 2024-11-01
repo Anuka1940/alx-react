@@ -1,9 +1,9 @@
-"homepage": "https://Anuka1940.github.com.io/alx-react",
 
 {
   "name": "dashboard",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://Anuka1940.github.com.io/alx-react",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
