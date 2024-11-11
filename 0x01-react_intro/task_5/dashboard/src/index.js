@@ -1,4 +1,6 @@
-import './styles.css';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
 
-document.getElementById('app').innerHTML = '<h1>Webpack Setup with Hot Reloading</h1>';
+ReactDOM.render(<App />, document.getElementById('root'));
 

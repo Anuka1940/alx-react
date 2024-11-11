@@ -1,5 +1,4 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -8,8 +7,6 @@ module.exports = {
     filename: 'bundle.js',
     clean: true,
   },
-  mode: 'development',
-  devtool: 'inline-source-map',
   devServer: {
     static: {
       directory: path.resolve(__dirname, '../dist'),
@@ -17,25 +14,40 @@ module.exports = {
     hot: true,
     open: true,
     port: 3000,
+    devMiddleware: {
+      writeToDisk: true,
+    },
   },
   module: {
     rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+        },
+      },
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
-        type: 'asset/resource',
-        loader: 'image-webpack-loader',
-        enforce: 'pre',
+        test: /\.(png|jpe?g|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[hash].[ext]',
+              outputPath: 'images',
+            },
+          },
+        ],
       },
     ],
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: './dist/index.html',
-    }),
-  ],
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
+  devtool: 'inline-source-map',
 };
 
